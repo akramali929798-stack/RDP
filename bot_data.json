@@ -1,1 +1,21 @@
 
+import json
+import os
+
+DB_FILE = "db.json"
+
+def load_db():
+    if not os.path.exists(DB_FILE):
+        return {}
+
+    try:
+        with open(DB_FILE, "r") as f:
+            content = f.read().strip()
+
+            if not content:
+                return {}
+
+            return json.loads(content)
+
+    except json.JSONDecodeError:
+        return {}
